@@ -28,7 +28,13 @@ function App() {
     setTodos(existingTodos ? JSON.parse(existingTodos) : []);
   }, []);
 
-  // Events
+  // Event Handlers
+  // addTodo function adds a todo to the todo list
+  //   event.preventDefault() prevents page reload
+  //   const next is a new array with the new todo added
+  //    - ...todos spreads the todos array into a new array
+  //    - todoText.current.value gets the value of the input field
+  //   setTodos(next) updates the todo list with the new todo
   function addTodo(event) {
     event.preventDefault();
     const next = [...todos, todoText.current.value];
