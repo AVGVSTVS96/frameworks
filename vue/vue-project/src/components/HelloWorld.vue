@@ -1,43 +1,41 @@
-<script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true
-  }
-})
-</script>
-
 <template>
-  <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
-    <h3>
-      You’ve successfully created a project with
-      <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
-    </h3>
+  <div>
+
+    <ul>
+      <li v-for="todo in todos" v-bind:key="todo">{{ todo }}</li>
+    </ul>
+
+    <form v-on:submit.prevent="addTodo">
+      <input v-model="todoText" placeholder="What needs to be done?">
+      <button type="submit">Add Todo</button>
+    </form>
+
   </div>
 </template>
 
+<script>
+export default {
+  name: 'HelloWorld',
+  data: function () {
+    return {
+      todos: [],
+      todoText: '',
+    };
+  },
+  methods: {
+    addTodo: function () {
+      this.todos = [...this.todos, this.todoText];
+      localStorage.setItem('todos', JSON.stringify(this.todos));
+      this.todoText = '';
+    },
+  },
+  mounted: function () {
+    const existingTodos = localStorage.getItem('todos');
+    this.todos = JSON.parse(existingTodos) || [];
+  },
+};
+</script>
+
+<!-- "scoped" attribute limits CSS to this component only -->
 <style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  top: -10px;
-}
-
-h3 {
-  font-size: 1.2rem;
-}
-
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
-}
 </style>
