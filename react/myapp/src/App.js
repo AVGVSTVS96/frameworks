@@ -3,17 +3,17 @@ import { useEffect, useRef, useState } from 'react';
 import './App.css';  // import css file
 
 // Declare a react function component
-  // A react component is a reusable piece of code that returns JSX to
-  // be rendered to the page
+//   A react component is a reusable piece of code that returns JSX to
+//   be rendered to the page
 function App() {
 
-  // useState hook 
-  //  - useState is a function that takes the initial state as an argument
+  // useState hook, a function that declares a state variable 
+  //  - It takes the initial state as an argument which sets the state of the todo list
   //  - The initial state is an empty array so todos will start as an empty list
     
-    // useState returns an array with two elements
-    //  - todos is the current state of the element
-    //  - setTodos is a function that can be used to update the state of todos  
+    // useState returns todos and setTodos
+    //  todos value of todo list as reactive state variable, always updated
+    //  setTodos is a function that can be used to update the state
   const [todos, setTodos] = useState([]);
 
   // useRef hook to get/reference values from DOM elements
@@ -37,6 +37,10 @@ function App() {
     todoText.current.value = '';
   }
 
+  // JSX returns the HTML to be rendered to the page
+  //   <ul> loops over todos in array => displays each todo as a <li> item
+  //   <form> calls addTodo function when form is submitted
+  //     - ref={todoText} gets the value of the input field
   return (
     <div>
       <ul>
